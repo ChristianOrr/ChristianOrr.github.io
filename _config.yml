@@ -107,14 +107,14 @@ analytics:
 # Site Author
 author:
   name             : "Christian Orr"
-  avatar           : "/images/mountain.jpg" # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
+  avatar           : "/images/profilephoto.JPG" # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
   bio              : "Data Science Portfolio"
   location         : "South Africa"
   email            :
   links:
     - label: "orrchristian@gmail.com"
       icon: "fas fa-fw fa-envelope-square"
-      # url: mailto:your.name@email.com
+      url: mailto:orrchristian@gmail.com
     - label: "Website"
       icon: "fas fa-fw fa-link"
       # url: "https://your-website.com"
