@@ -107,7 +107,7 @@ analytics:
 # Site Author
 author:
   name             : "Christian Orr"
-  avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
+  avatar           : "/images/mountain.jpg" # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
   bio              : "Data Science Portfolio"
   location         : "South Africa"
   email            :
