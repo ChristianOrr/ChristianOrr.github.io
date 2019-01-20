@@ -43,7 +43,8 @@ import json
 
 
 ```python
-with open("BikeShareStations.json") as json_file:
+with open("BikeShareStations.json")
+as json_file:
     json_data = json.load(json_file)
     print(json_data)
 ```
@@ -324,24 +325,49 @@ I have managed to represent each nested dictionary in its own column in the Pand
 
 
 ```python
-columns = ['geometry.type', 'properties.addressCity', 'properties.hasGeofence', 'properties.isEventBased',
-           'properties.isVirtual', 'properties.eventEnd', 'properties.kioskType', 'properties.eventStart',
-           'properties.kioskStatus', 'properties.smartBikesAvailable', 'properties.trikesAvailable',
-           'properties.addressState', 'properties.addressZipCode', 'properties.notes', 'properties.publicText',
-           'properties.timeZone', 'type','properties.closeTime', 'properties.isVisible', 'properties.latitude',
-           'properties.longitude', 'properties.openTime', 'properties.docksAvailable', 'properties.classicBikesAvailable',
-           'properties.electricBikesAvailable', 'properties.kioskConnectionStatus', 'properties.kioskId']
-dataFrame.drop(columns, inplace = True, axis = 1)
+columns = ['geometry.type',
+           'properties.addressCity',
+           'properties.hasGeofence',
+           'properties.isEventBased',
+           'properties.isVirtual',
+           'properties.eventEnd',
+           'properties.kioskType',
+           'properties.eventStart',
+           'properties.kioskStatus',
+           'properties.smartBikesAvailable',
+           'properties.trikesAvailable',
+           'properties.addressState',
+           'properties.addressZipCode',
+           'properties.notes',
+           'properties.publicText',
+           'properties.timeZone', 'type',
+           'properties.closeTime',
+           'properties.isVisible',
+           'properties.latitude',
+           'properties.longitude',
+           'properties.openTime',
+           'properties.docksAvailable',
+           'properties.classicBikesAvailable',
+           'properties.electricBikesAvailable',
+           'properties.kioskConnectionStatus',
+           'properties.kioskId']
+dataFrame.drop(columns,
+               inplace = True,
+               axis = 1)
 ```
 
 All the useless data has been removed. Now I'm creating clearer column titles.
 
 
 ```python
-dataFrame = dataFrame.rename(columns = {'geometry.coordinates' : 'Coordinates', 'properties.addressStreet' :
-                                        'Street Address', 'properties.bikesAvailable' : 'Available Bikes',
-                                        'properties.kioskPublicStatus' : 'Public Status', 'properties.name' :
-                                        'Properties', 'properties.totalDocks' : 'Total Docks'})
+dataFrame =
+dataFrame.rename(columns =
+                 {'geometry.coordinates' : 'Coordinates',
+                  'properties.addressStreet' : 'Street Address',
+                  'properties.bikesAvailable' : 'Available Bikes',
+                  'properties.kioskPublicStatus' : 'Public Status',
+                  'properties.name' : 'Properties',
+                  'properties.totalDocks' : 'Total Docks'})
 ```
 
 
@@ -475,20 +501,31 @@ If we take a quick look at the code, in the first line, I introduced the map. Th
 
 
 ```python
-philMap = folium.Map(location=[39.95378, -75.16374], tiles = 'cartodbpositron', zoom_start = 13)
+philMap =
+folium.Map(location=[39.95378, -75.16374],
+           tiles = 'cartodbpositron',
+           zoom_start = 13)
 
 def addStation(index):
-    bikes = dataFrame['Available Bikes'].iloc[index] * 5
-    street = dataFrame['Street Address'].iloc[index]
-    coordinates = dataFrame['Coordinates'].iloc[index]
-    if dataFrame['Public Status'].iloc[index] != 'Active':
+    bikes =
+    dataFrame['Available Bikes'].iloc[index]* 5
+    street =
+    dataFrame['Street Address'].iloc[index]
+    coordinates =
+    dataFrame['Coordinates'].iloc[index]
+    if dataFrame['Public Status'].iloc[index] !=
+    'Active':
         color1 = 'red'
     else:
         color1 = 'blue'
 
 
-    folium.Circle(radius = int(bikes), location = coordinates, popup = '<i>'+street+'</i>', color = color1,
-                  fill = True, fill_color = color1).add_to(philMap)
+    folium.Circle(radius = int(bikes),
+                  location = coordinates,
+                  popup = '<i>'+street+'</i>',
+                  color = color1,
+                  fill = True,
+                  fill_color = color1).add_to(philMap)
 
 
 for x in range(130):
@@ -515,15 +552,20 @@ The first thing I'm going to do is add a new column, showing the bikes in use at
 
 
 ```python
-dataFrame['Bikes In Use'] = (dataFrame['Total Docks'] - dataFrame['Available Bikes'])
+dataFrame['Bikes In Use'] =
+(dataFrame['Total Docks'] -
+ dataFrame['Available Bikes'])
 ```
 
 I'm reordering the columns into a better position.
 
 
 ```python
-dataFrame = dataFrame[['Coordinates', 'Street Address', 'Properties', 'Public Status', 'Total Docks', 'Available Bikes',
-                      'Bikes In Use']]
+dataFrame =
+dataFrame[['Coordinates', 'Street Address',
+           'Properties', 'Public Status',
+           'Total Docks', 'Available Bikes',
+           'Bikes In Use']]
 ```
 
 
@@ -622,15 +664,25 @@ I'm using the same code I used for the Available Bikes map, except for a few sma
 
 
 ```python
-philMap = folium.Map(location=[39.95378, -75.16374], tiles = 'cartodbpositron', zoom_start = 13)
+philMap =
+folium.Map(location=[39.95378, -75.16374],
+           tiles = 'cartodbpositron',
+           zoom_start = 13)
 
 def addStation(index):
-    bikes1 = dataFrame['Bikes In Use'].iloc[index] * 5
-    street = dataFrame['Street Address'].iloc[index]
-    coordinates = dataFrame['Coordinates'].iloc[index]
+    bikes1 =
+    dataFrame['Bikes In Use'].iloc[index] * 5
+    street =
+    dataFrame['Street Address'].iloc[index]
+    coordinates =
+    dataFrame['Coordinates'].iloc[index]
 
-    folium.Circle(radius = int(bikes1), location = coordinates, popup = '<i>'+street+'</i>', color = 'green',
-                  fill = True, fill_color = 'green').add_to(philMap)
+    folium.Circle(radius = int(bikes1),
+                  location = coordinates,
+                  popup = '<i>'+street+'</i>',
+                  color = 'green',
+                  fill = True,
+                  fill_color = 'green').add_to(philMap)
 
 
 for x in range(130):
@@ -657,23 +709,39 @@ My last map will combine information from the previous two maps. This will prove
 
 
 ```python
-philMap = folium.Map(location=[39.95378, -75.16374], tiles = 'cartodbpositron', zoom_start = 13)
+philMap =
+folium.Map(location=[39.95378, -75.16374],
+           tiles = 'cartodbpositron',
+           zoom_start = 13)
 
 def addStation(index):
-    bikes = dataFrame['Available Bikes'].iloc[index] * 5
-    bikes1 = dataFrame['Bikes In Use'].iloc[index] * 5
-    street = dataFrame['Street Address'].iloc[index]
-    coordinates = dataFrame['Coordinates'].iloc[index]
-    if dataFrame['Public Status'].iloc[index] != 'Active':
+    bikes =
+    dataFrame['Available Bikes'].iloc[index] * 5
+    bikes1 =
+    dataFrame['Bikes In Use'].iloc[index] * 5
+    street =
+    dataFrame['Street Address'].iloc[index]
+    coordinates =
+    dataFrame['Coordinates'].iloc[index]
+    if dataFrame['Public Status'].iloc[index] !=
+    'Active':
         color1 = 'red'
     else:
         color1 = 'blue'
 
 
-    folium.Circle(radius = int(bikes), location = coordinates, popup = '<i>'+street+'</i>', color = color1,
-                  fill = True, fill_color = color1).add_to(philMap)
-    folium.Circle(radius = int(bikes1), location = coordinates, popup = '<i>'+street+'</i>', color = 'green',
-                  fill = True, fill_color = 'green').add_to(philMap)
+    folium.Circle(radius = int(bikes),
+                  location = coordinates,
+                  popup = '<i>'+street+'</i>',
+                  color = color1,
+                  fill = True,
+                  fill_color = color1).add_to(philMap)
+    folium.Circle(radius = int(bikes1),
+                  location = coordinates,
+                  popup = '<i>'+street+'</i>',
+                  color = 'green',
+                  fill = True,
+                  fill_color = 'green').add_to(philMap)
 
 
 for x in range(130):
@@ -703,8 +771,3 @@ This map has more use to the owner of the company than the previous two maps, be
 Before I conclude this project, I need to disclose that I have never worked for this bike company and the analysis on this data is by no means all the analysis I could provide. I am limited by the amount of data available.
 
 For example, given more data I could have created a time series map showing the usage of the bikes over a day/week/month. If I had access to the financial data, I could have created a map showing the profitability of each station . I could have also shown the positions of the opposition stations and how much of an effect their stations have on the subject bike company, etc, etc.
-
-
-```python
-
-```
