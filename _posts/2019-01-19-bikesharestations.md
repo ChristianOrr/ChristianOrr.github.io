@@ -8,7 +8,6 @@ excerpt: "Data Science Projects, Python, Bike Share Stations"
 mathjax: "true"
 ---
 
-
 # Bike Share Stations In Philadelphia
 
 ## Legal Notice
@@ -17,17 +16,21 @@ I obtained the data in this project from an anonymous bike sharing company in Ph
 This was provided as a public data set on the data sharing website github.com, by the anonymous bike sharing company.
 So to summarise, this data was obtained legally and I am entitled to use the data for my private project.
 
-## Aim of The Project
+## Aim
 
-Before I can describe what I want to achieve in this project, I need to describe the type of data I have obtained.
+For this project the owner of the bike company is trying to understand how each of his bike stations is performing. As you will see, there is simply too many bike stations and too much data recorded at each station for the owner to assess their performance individually. So now its my job to understand the data and present the most usefull information in a map.
+
+## Strategy
+
+The first thing I need to do is analyse all aspects of the data.
 The data is in a .json format. This means that I will need to do some manipulation to get the data into the desired Pandas DataFrame format.
-The data has also not been cleaned. So I will have to do various tasks such as, deleting unneccesary columns, changing column names, prepering the DataFrame to be plotted, etc.
-Then once the data has been converted and cleaned, I would like to create a map that can convey all the useful information about the bike stations to the owner of the anonymous company. The map also needs to be represented so that the data is clear and easy to understand by anyone.
-If you do not understand Python, do not fear, because I will go though each step and explain exactly what I'm doing.
+The data hasn't been cleaned either. So I will have to do various tasks such as, deleting unneccesary columns, changing column names, prepering the DataFrame to be plotted, etc.
+Then once the data has been converted and cleaned, I would like to create a map that can convey all the useful information about the bike stations to the owner. The map also needs to be represented so that the data is clear and easy to understand by someone without a programming background.
+If you do not understand Python, do not fear, because I will go though each step and explain exactly what I'm doing along the way.
 
 ## Lets Start The Project
 
-#### The first thing I need to do is import the Libraries I will be using throughout the project.
+The first thing I need to do is import the Libraries I'm going to use.
 
 
 ```python
@@ -62,7 +65,7 @@ type(json_data)
 
 ## Cleaning The Data
 
-#### The contents of the file is in an undesirable dictionary format. So now I need to convert the data into a DataFrame.
+The contents of the file is in an undesirable dictionary format. I need to convert the data into a DataFrame.
 
 
 ```python
@@ -127,7 +130,7 @@ dataFrame.head()
 
 
 
-#### Now that the data is in the DataFrame structure, I have encountered another problem. I can't see the majorityof the contents, because the dictionary was a nested dictionary. So now I need to try represent the nested dictionaries in their own columns. I will achieve this by using the json_normalize function.
+Now that the data is in the DataFrame structure, I have encountered another problem. I can't see most of the contents, because the dict was a nested dictionary. I need to try represent the nested dictionaries in their own columns. I can achieve this by using the json_normalize function.
 
 
 ```python
@@ -317,7 +320,7 @@ dataFrame.head()
 
 
 
-#### I have now managed to represent each nested dictionary in its own column in the Pandas DataFrame. However, I now have 33 columns, which is far too many. So now I'm going to remove any unnecessary or repeated columns.
+I have managed to represent each nested dictionary in its own column in the Pandas DataFrame. However, now I have 33 columns, which is far too many. I'm going to remove any unnecessary or repeated columns.
 
 
 ```python
@@ -331,7 +334,7 @@ columns = ['geometry.type', 'properties.addressCity', 'properties.hasGeofence', 
 dataFrame.drop(columns, inplace = True, axis = 1)
 ```
 
-#### All the useless data has been removed, now I'm creating clearer column titles.
+All the useless data has been removed. Now I'm creating clearer column titles.
 
 
 ```python
@@ -353,7 +356,7 @@ dataFrame.index
 
 
 
-#### The latitude and longitude coordinates are in the wrong position for each row. So I have created a 'for' loop to iterate over every row and a function to change the coordinate positions.
+The latitude and longitude coordinates are in the wrong position for each row. To solve this problem, I created a 'for' loop to iterate over each row and a function to change the coordinate positions.
 
 
 ```python
@@ -455,17 +458,20 @@ dataFrame.head()
 
 ## Plotting The Data
 
-#### In my plot I need to convey the maximum amount of information in a single look. I have embedded information such as:
+I need to convey the maximum amount of usefull information in my plot. Hence, I have embedded information such as:
 * The position of each station
 * The number of available bikes at each station
 * Whether a station is active or not
 
-#### I have achieved this by doing the following:
-* I have placed a circle on the position of each station
-* I have color coded the circles to indicate if the station is active or not, i.e green = Active, red = Unavailable
-* I have created a correlation between the size of the circle and the number of bikes that are available at that time, i.e. larger circle = more bikes available
+I achieved this by doing the following:
+* I placed a circle at the position of each station
+* I color coded the circles to indicate if the station is active or not, i.e green = Active, red = Unavailable
+* I created a correlation between the size of the circle and the number of bikes that are available at that time, i.e. larger circle = more bikes available
 
-#### If we take a quick look at the code, in the first line of the code, I introduced the map. Then I created a function that adds a point containing all the information I  just describled, i.e. circle size, colour, etc. Then I introduced a 'for' loop to iterate over each element in the list.
+
+## Available Bikes
+
+If we take a quick look at the code, in the first line, I introduced the map. Then I created a function that adds a circle, containing all the information I need, i.e. circle size, colour, etc. Then I introduced a 'for' loop to iterate over each element in the list.
 
 
 ```python
@@ -499,18 +505,20 @@ philMap
 
 
 
-#### As you can see from the map I just created, certain areas have far more bikes available than other areas. The bike company may think this is a waste of resources, because they are not generating revenue from those bikes. On the other hand they might also think those areas might need those bikes for a busier part of the day.
-#### Unfortunately I only have access to data from this particular point in time, so I can't check which areas will get busy and which will be vacant.
-#### I can, however check what areas are busy at this particular point in time. I will achieve that by showing the amount of bikes in use at the moment this data was captured.
+As you can see from the map, certain areas have far more bikes available than other areas. The bike company may think this is a waste of resources, because they're not generating revenue from the available bikes. On the other hand, they might think those excess bikes are needed for the busier periods.
+Unfortunately I only have access to data from this point in time, so I can't check which areas will get busier and which will be vacant.
+I can, however check which areas are busy at this point in time.
 
-#### The first thing I'm going to do is add a new column, showing the bikes in use at each station.
+## Bikes In Use
+
+The first thing I'm going to do is add a new column, showing the bikes in use at each station.
 
 
 ```python
 dataFrame['Bikes In Use'] = (dataFrame['Total Docks'] - dataFrame['Available Bikes'])
 ```
 
-#### I'm reordering the columns into a better position.
+I'm reordering the columns into a better position.
 
 
 ```python
@@ -610,6 +618,8 @@ dataFrame.head()
 
 
 
+I'm using the same code I used for the Available Bikes map, except for a few small changes. I changed the values to the 'Bikes In Use' column, changed the colour to green and removed the red colouring for the unavailable bikes, since this has no influence on the bikes in use.
+
 
 ```python
 philMap = folium.Map(location=[39.95378, -75.16374], tiles = 'cartodbpositron', zoom_start = 13)
@@ -637,9 +647,13 @@ philMap
 
 
 
-#### This map reveals a lot of information about where the bikes are popular, however we still don't know which stations have a shortage of bikes and which stations have an excess of bikes.
+This map reveals a lot of information about where the bikes are popular, however we still don't know which stations have a shortage of bikes and which stations have an excess of bikes.
 
-#### I have created another map, which will hopefully help answer this question. This map combines the data from the 'Available Bikes' map and the 'Bikes In Use' map.
+I have created another map, which will hopefully help answer this question. This map combines the data from the 'Available Bikes' map and the 'Bikes In Use' map.
+
+## Final Map
+
+My last map will combine information from the previous two maps. This will prove to be massively benificial to the owner, because there is certain information you cannot deduce by looking at the previous two maps individually. I will discuss this information after the map.
 
 
 ```python
@@ -676,17 +690,17 @@ philMap
 
 
 
-#### The blue indicates the 'Available Bikes', and the green indicates the 'Bikes In Use'. So using that information, we can see that if the blue circle is vastly larger than the green circle, then there is an excess of bikes at that station and at that particular point in time. However if the green circle is vastly larger than the blue circle, then there is a shortage of bikes at that station and at that particular point in time.
+The blue indicates the 'Available Bikes', the green indicates the 'Bikes In Use' and the red indicates the 'Unavailable Bikes'. So using that information we can see if the blue circle is vastly larger than the green circle, then there is an excess of bikes at that station, at that time. However if the green circle is vastly larger than the blue circle, there is a shortage of bikes at that station and time.
 
-#### The optimal situation for a station, would be for the station to have slightly more bikes in use than bikes available.
+The optimal situation for a station, would be for the station to have slightly more bikes in use than bikes available.
 
-#### This map has a lot more use to the owner of the company than the previous two maps, because now he/she can tell what stations are performing optimally and what stations are potentially losing money.
+This map has more use to the owner of the company than the previous two maps, because now he/she can tell what stations are performing optimally and what stations are potentially losing money.
 
 
 
 ## Conclusion
 
-Before I conclude this project, I need to disclose that I have never worked for this bike company and the analysis on this data is by no means all the analysis I could provide. I am limited by the amount of data I have available.
+Before I conclude this project, I need to disclose that I have never worked for this bike company and the analysis on this data is by no means all the analysis I could provide. I am limited by the amount of data available.
 
 For example, given more data I could have created a time series map showing the usage of the bikes over a day/week/month. If I had access to the financial data, I could have created a map showing the profitability of each station . I could have also shown the positions of the opposition stations and how much of an effect their stations have on the subject bike company, etc, etc.
 
