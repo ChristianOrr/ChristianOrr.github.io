@@ -4,7 +4,7 @@ date: 2019-01-19
 tags: [python, data science]
 header:
   image: "/images/bicycles.jpg"
-excerpt: "Data Science, Python, Bike Share Stations"
+excerpt: "Data Science Projects, Python, Bike Share Stations"
 mathjax: "true"
 ---
 
