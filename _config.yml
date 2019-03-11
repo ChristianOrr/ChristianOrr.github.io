@@ -126,10 +126,13 @@ author:
       # url: "https://facebook.com/"
     - label: "ChristianOrr"
       icon: "fab fa-fw fa-github"
-      url: "https://github.com/ChristianOrr/ChristianOrr.github.io.git"
+      #url: "https://github.com/ChristianOrr/ChristianOrr.github.io.git"
     - label: "Instagram"
       icon: "fab fa-fw fa-instagram"
       # url: "https://instagram.com/"
+    - label: "Linkedin"
+      icon: "fab fa-fw fa-linkedin"
+      url: "https://www.linkedin.com/in/christian-orr-271692180/"
 
 # Site Footer
 footer:
@@ -152,6 +155,8 @@ footer:
     - label: "Instagram"
       icon: "fab fa-fw fa-instagram"
       # url:
+
+
 
 
 # Reading Files

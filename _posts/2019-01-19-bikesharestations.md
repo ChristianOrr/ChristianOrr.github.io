@@ -770,4 +770,4 @@ This map has more use to the owner of the company than the previous two maps, be
 
 Before I conclude this project, I need to disclose that I have never worked for this bike company and the analysis on this data is by no means all the analysis I could provide. I am limited by the amount of data available.
 
-For example, given more data I could have created a time series map showing the usage of the bikes over a day/week/month. If I had access to the financial data, I could have created a map showing the profitability of each station . I could have also shown the positions of the opposition stations and how much of an effect their stations have on the subject bike company, etc, etc.
+For example, given more data I could have created a time series map showing the usage of the bikes over a day/week/month. If I had access to the financial data, I could have created a map showing the profitability of each station . I could have also shown the positions of the opposition stations and how much of an effect their stations have on the subject bike company.
