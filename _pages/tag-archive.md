@@ -2,8 +2,9 @@
 layout: archive
 permalink: /tags/
 title: "Project Tags"
-header:
-  image: #
+#header:
+#  image:
+classes: wide
 ---
 
 {{ content }}

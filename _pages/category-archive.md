@@ -2,8 +2,9 @@
 layout: archive
 permalink: /categories/
 title: "Project Categories"
-header:
-  image: #
+#header:
+#  image:
+classes: wide
 ---
 
 {{ content }}
