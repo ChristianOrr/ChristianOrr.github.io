@@ -2,7 +2,6 @@
 layout: archive
 permalink: /categories/
 title: "Project Categories"
-author_profile: true
 header:
   image: #
 ---

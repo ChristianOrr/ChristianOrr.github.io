@@ -2,7 +2,6 @@
 layout: archive
 permalink: /tags/
 title: "Project Tags"
-author_profile: true
 header:
   image: #
 ---
