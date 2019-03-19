@@ -1,7 +1,7 @@
 ---
 title: "Data Science Projects: Bike Share Stations"
 date: 2019-01-21
-tags: [python, data science]
+tags: [Data Science]
 header:
   image: "/images/bicycles.jpg"
 excerpt: "Data Science Projects, Python, Bike Share Stations"
