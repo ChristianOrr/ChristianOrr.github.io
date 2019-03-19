@@ -1,5 +1,5 @@
 ---
-title: "Mushroom Classification Part 1: Logistic Regression"
+title: "Machine Learning Projects: Logistic Regression"
 date: 2019-03-19
 tags: [Machine Learning]
 header:
