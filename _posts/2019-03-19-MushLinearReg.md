@@ -6,6 +6,7 @@ header:
   image: "/images/mushrooms1.jpg"
 excerpt: "Data Science Projects, Machine Learning, Classification"
 mathjax: "true"
+classes: wide
 ---
 # Mushroom Classification With Logistic Regression
 

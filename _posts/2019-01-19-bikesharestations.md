@@ -6,6 +6,7 @@ header:
   image: "/images/bicycles.jpg"
 excerpt: "Data Science Projects, Python, Bike Share Stations"
 mathjax: "true"
+classes: wide
 ---
 
 # Bike Share Stations In Philadelphia
