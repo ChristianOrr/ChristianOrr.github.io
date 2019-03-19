@@ -11,11 +11,11 @@ mathjax: "true"
 
 ## Aim
 
-I'm working with a dataset that contains 8124 different mushrooms. My ultimate goal is to determine whether a mushroom is edible or poisonous. I will achieve this is by using the different features of each mushroom and find a correlation between the features and the class (poisonous/edible). There are some obvious benefits of this classification, the first benefit is safety. Being able to classify a poisonous mushroom using a few features, such as the cap shape, cap color, odor, and gill size for example could save peoples lives. The alternative would be to try to determine the chemical composition of the mushroom or to have access to the entire list of poisonous mushrooms. Both of these options would be extremely impractical for hikers or people living in remote areas. Hence being able to classify a mushroom accurately using its features would be highly beneficial.
+I'm working with a dataset that contains 8124 different mushrooms. My ultimate goal is to determine whether a mushroom is edible or poisonous. I will achieve this is by using the different features of each mushroom and find a correlation between the features and the class (poisonous/edible). There are some obvious benefits of this classification, the first benefit is safety. Being able to classify a poisonous mushroom using a few features, such as the cap shape, cap color, odor, and gill size for example could save peoples lives. The alternative would be to try to determine the chemical composition of the mushroom or to have access to the entire list of poisonous mushrooms. Both of these options would be extremely impractical for hikers or people living in remote areas. Hence being able to classify a mushroom accurately using its features would be highly beneficial. 
 
 ## Strategy
 
-I'm going to perform this classification using the machine learning technique, logistic regression. I've decided to use logistic regression because it's one of the simplest classification methods. This gives me the ability to clearly explain each step in this project, without the project getting too long. The aim of logistic regression is to separate the data using a linear function, this function is called the decision boundary. All the points on one side of the decision boundary are classified as poisonous and all points on the opposite side are classified as edible. I'm not going to explain explicitly how the linear function is determined, because this will require university level mathematics and statistics. My short explanation is that each muchroom has a probability function assigned to it, which determines the probability of achieving the correct class (poisonous/edible), given its features. Then the probability functions for all mushrooms are combined to form another function, called a loss function. Then I need to find the minimum of this loss function, which will tell me the optimal decision boundary. I'm going to use skikit-learn to do the logistic regression, so you won't see any of these calculations in this project. Logistic regression can be performed on data points with many dimensions, but for this project I want to work with data in two dimensions. This will allow my computer to quickly process the data and give me the ability to plot all the points on a two dimensional graph. I will end up having 95 separate dimensions, so to transform these features into 2 dimensions, I will use a technique called principle component analysis (PCA). PCA uses a fairly advanced mathematical technique called projection, which projects a vector with higher dimensions onto a vector with lower dimensions. I will be relying on skikit-learn to perform PCA, so you won't need to know exactly how it works. Once the features have been reduced to two dimensions, then I will plot the points on a graph and add the linear decision boundary, created from the logistic regression classifier.
+I'm going to perform this classification using the machine learning technique, logistic regression. I've decided to use logistic regression because it's one of the simplest classification methods. This gives me the ability to clearly explain each step in this project, without the project getting too long. The aim of logistic regression is to separate the data using a linear function, this function is called the decision boundary. All the points on one side of the decision boundary are classified as poisonous and all points on the opposite side are classified as edible. I'm not going to explain explicitly how the linear function is determined, because this will require university level mathematics and statistics. My short explanation is that each muchroom has a probability function assigned to it, which determines the probability of achieving the correct class (poisonous/edible), given its features. Then the probability functions for all mushrooms are combined to form another function, called a loss function. Then I need to find the minimum of this loss function, which will tell me the optimal decision boundary. I'm going to use skikit-learn to do the logistic regression, so you won't see any of these calculations in this project. Logistic regression can be performed on data points with many dimensions, but for this project I want to work with data in two dimensions. This will allow my computer to quickly process the data and give me the ability to plot all the points on a two dimensional graph. I will end up having 95 separate dimensions, so to transform these features into 2 dimensions, I will use a technique called principle component analysis (PCA). PCA uses a fairly advanced mathematical technique called projection, which projects a vector with higher dimensions onto a vector with lower dimensions. I will be relying on skikit-learn to perform PCA, so you won't need to know exactly how it works. Once the features have been reduced to two dimensions, then I will plot the points on a graph and add the linear decision boundary, created from the logistic regression classifier. 
 
 ## Importing Libraries and Loading Data
 
@@ -215,7 +215,7 @@ data.head()
 
 
 
-I need to make sure the data is clean before I can proceed. As you can see below, there are no null values. This is a very good sign. I will have to assume there is no mislabeled data, because there is simply no way for me to check this.
+I need to make sure the data is clean before I can proceed. As you can see below, there are no null values. This is a very good sign. I will have to assume there is no mislabeled data, because there is simply no way for me to check this. 
 
 
 ```python
@@ -252,7 +252,7 @@ data.isnull().sum()
 
 
 
-If you look at the amount of unique elements in each column, it ranges from 2 to 12. This will become a problem when I do PCA, because I need each element in a column to be comparable to each other on a scale. For example, you can't measure objectively how close one cap shape is to a different cap shape, or how close an odor is to a different odor on a numerical scale. The solution to this problem is to create a new column for each unique element in a column. The next issue is that the elements in each column aren't comparable to elements in other columns. For example, you can't compare a specific cap shape to an odor. To solve this I will use a skikit-learn function called StandardScalar, which gives each column the same mean = 0, and standard deviation = 1. This essentially makes the elements in each column directly comparable.
+If you look at the amount of unique elements in each column, it ranges from 2 to 12. This will become a problem when I do PCA, because I need each element in a column to be comparable to each other on a scale. For example, you can't measure objectively how close one cap shape is to a different cap shape, or how close an odor is to a different odor on a numerical scale. The solution to this problem is to create a new column for each unique element in a column. The next issue is that the elements in each column aren't comparable to elements in other columns. For example, you can't compare a specific cap shape to an odor. To solve this I will use a skikit-learn function called StandardScalar, which gives each column the same mean = 0, and standard deviation = 1. This essentially makes the elements in each column directly comparable. 
 
 
 ```python
@@ -425,7 +425,7 @@ from sklearn.preprocessing import LabelEncoder
 le = LabelEncoder()
 for col in features.columns:
     features[col] = le.fit_transform(features[col])
-
+    
 labels = le.fit_transform(labels)
 ```
 
@@ -572,11 +572,12 @@ labels
 
 
 
-Most of the integers within each column are not numerically comparable, so I'm going to create a new column for each unique integer.
+Most of the integers within each column are not numerically comparable, so I'm going to create a new column for each unique integer. 
 
 
 ```python
-features = pd.get_dummies(features, columns=features.columns, drop_first=True)
+features = pd.get_dummies(
+    features, columns=features.columns, drop_first=True)
 ```
 
 
@@ -710,12 +711,14 @@ features.head(3)
 
 ## Splitting Into Test And Training Data
 
-When creating a logistic regression model, I need to know the class (poisonous/edible) associated with each mushroom. However, I can only understand the true accuracy of a classifier by testing on mushroom data, where the class hasn't already been provided. So I have allocated 70% of my data to creating my logistic regression model and 30% of my data to testing the accuracy of my model.
+When creating a logistic regression model, I need to know the class (poisonous/edible) associated with each mushroom. However, I can only understand the true accuracy of a classifier by testing on mushroom data, where the class hasn't already been provided. So I have allocated 70% of my data to creating my logistic regression model and 30% of my data to testing the accuracy of my model. 
 
 
 ```python
 from sklearn.model_selection import train_test_split
-feat_train, feat_test, label_train, label_test = train_test_split(features, labels, test_size = 0.3, random_state=42)
+feat_train, feat_test, label_train, label_test = 
+train_test_split(
+    features, labels, test_size = 0.3, random_state=42)
 ```
 
 
@@ -950,7 +953,7 @@ feat_train = PCA(n_components=2).fit_transform(feat_train)
 feat_test = PCA(n_components=2).fit_transform(feat_test)
 ```
 
-As you can see below, the features have now been condensed to two dimensions, while most of the information has been retained.
+As you can see below, the features have now been condensed to two dimensions, while most of the information has been retained. 
 
 
 ```python
@@ -976,7 +979,8 @@ I'm using skikit-learn's accuracy_score function to measure the accuracy of the 
 
 
 ```python
-from sklearn.model_selection import cross_val_predict, cross_val_score
+from sklearn.model_selection import 
+cross_val_predict, cross_val_score
 from sklearn.metrics import accuracy_score
 ```
 
@@ -984,13 +988,21 @@ I've created a small function that will determine the accuracy of the classifier
 
 
 ```python
-def print_accuracy(classifier, feat_train, label_train, feat_test, label_test, dataset):
+def print_accuracy(
+    classifier, feat_train, label_train, feat_test, 
+    label_test, dataset):
     if (dataset == "train"):
-        print("Training Accuracy: {0:.4f} \n" .format(accuracy_score(label_train, classifier.predict(feat_train))))
-
+        print(
+            "Training Accuracy: {0:.4f} \n" .format(
+                accuracy_score(label_train, 
+                               classifier.predict(feat_train))))
+        
     elif (dataset == "test"):
-        print("Test Accuracy: {0:.4f} \n" .format(accuracy_score(label_test, classifier.predict(feat_test))))        
-
+        print(
+            "Test Accuracy: {0:.4f} \n" .format(
+                accuracy_score(label_test, 
+                               classifier.predict(feat_test))))        
+        
 ```
 
 ## Creating The Logistic Regression Model
@@ -1021,60 +1033,68 @@ The logistic regression classifier appears to have performed fairly well, with a
 
 
 ```python
-print_accuracy(classifier, feat_train, label_train, feat_test, label_test, "train")
+print_accuracy(
+    classifier, feat_train, label_train, 
+    feat_test, label_test, "train")
 ```
 
-    Training Accuracy: 0.9057
-
+    Training Accuracy: 0.9057 
+    
 
 
 
 ```python
-print_accuracy(classifier, feat_train, label_train, feat_test, label_test, "test")
+print_accuracy(
+    classifier, feat_train, label_train, 
+    feat_test, label_test, "test")
 ```
 
-    Test Accuracy: 0.9011
-
+    Test Accuracy: 0.9011 
+    
 
 
 ## Plotting The Data
 
-I've created a function to display the data (show_plot), this will provide some useful insights. The function can either display the training or the test data. I achieved this by assigning train/test data to new variables, the x_set and y_set. Then I created a mesh grid, this is a dense rectangle of coordinates, covering the area of the data points. For this plot, I'm using the mesh grid to find the data points on the boundary. However, the mesh grid will become more useful when creating the decision boundary in the next plot. To show all the points, I've created a for loop, with a scatter plot. Every point that has the class 0 (edible) is assigned the color green and every point that has the class 1 (poisonous) is assigned the color red.
+I've created a function to display the data (show_plot), this will provide some useful insights. The function can either display the training or the test data. I achieved this by assigning train/test data to new variables, the x_set and y_set. Then I created a mesh grid, this is a dense rectangle of coordinates, covering the area of the data points. For this plot, I'm using the mesh grid to find the data points on the boundary. However, the mesh grid will become more useful when creating the decision boundary in the next plot. To show all the points, I've created a for loop, with a scatter plot. Every point that has the class 0 (edible) is assigned the color green and every point that has the class 1 (poisonous) is assigned the color red. 
 
 
 ```python
 def show_plot(dataset):
 
     plt.figure(figsize = (12,8))
-
+    
     if (dataset == 'train'):
         x_set, y_set = feat_train, label_train
-
+        
     elif (dataset == 'test'):
         x_set, y_set = feat_test, label_test
-
-
-    x1, x2 = np.meshgrid(np.arange(start = x_set[:, 0].min() - 1, stop = x_set[:, 0].max() + 1, step = 0.01),
-                         np.arange(start = x_set[:, 1].min() - 1, stop = x_set[:, 1].max() + 1, step = 0.01))
+        
+        
+    x1, x2 = np.meshgrid(
+        np.arange(start = x_set[:, 0].min() - 1, 
+                  stop = x_set[:, 0].max() + 1, step = 0.01), 
+        np.arange(start = x_set[:, 1].min() - 1, 
+                  stop = x_set[:, 1].max() + 1, step = 0.01))
 
     plt.xlim(x1.min(), x1.max())
     plt.ylim(x2.min(), x2.max())
-
+    
     for i, j in enumerate(np.unique(label_train)):        
-        plt.scatter(x_set[y_set == j,0], x_set[y_set == j,1], marker='o',
-                    color = ListedColormap(('green', 'red'))(i), label=j)
-
-
+        plt.scatter(
+            x_set[y_set == j,0], x_set[y_set == j,1], marker='o', 
+            color = ListedColormap(('green', 'red'))(i), label=j)
+    
+    
     plt.xlabel('Princical Component 1', fontsize = 16)
     plt.ylabel('Principle Component 2', fontsize = 16)
     plt.legend()
-
+    
     if (dataset == 'train'):
         plt.title("Training Set", fontsize = 16)
-
+        
     elif (dataset == 'test'):
         plt.title("Test Set", fontsize = 16)
-
+        
     plt.show()
 ```
 
@@ -1086,10 +1106,10 @@ show_plot('train')
 ```
 
 
-![](/images/output_59_0.png?raw=true)
+![png](/images/output_59_0.png)
 
 
-The test set has a very similar pattern to the training set, with the red points on the right and green points on the left. The major difference between the sets is that the test set is more sparse, which is exactly what we would expect, since the test set uses 30% of all data points.
+The test set has a very similar pattern to the training set, with the red points on the right and green points on the left. The major difference between the sets is that the test set is more sparse, which is exactly what we would expect, since the test set uses 30% of all data points. 
 
 
 ```python
@@ -1097,7 +1117,7 @@ show_plot('test')
 ```
 
 
-![](/images/output_61_0.png?raw=true)
+![png](/images/output_61_0.png)
 
 
 ## Plotting The Decision Boundary
@@ -1109,39 +1129,49 @@ This plot is very similar to the previous plot, except for a few small changes t
 def classifier_plot(model, dataset):
 
     plt.figure(figsize = (12,8))
-
+    
     if (dataset == 'train'):
         x_set, y_set = feat_train, label_train
-
+        
     elif (dataset == 'test'):
         x_set, y_set = feat_test, label_test
-
-    x1, x2 = np.meshgrid(np.arange(start = x_set[:, 0].min() - 1, stop = x_set[:, 0].max() + 1, step = 0.01),
-                         np.arange(start = x_set[:, 1].min() - 1, stop = x_set[:, 1].max() + 1, step = 0.01))
+        
+    x1, x2 = np.meshgrid(
+        np.arange(start = x_set[:, 0].min() - 1, 
+                  stop = x_set[:, 0].max() + 1, step = 0.01), 
+        np.arange(start = x_set[:, 1].min() - 1, 
+                  stop = x_set[:, 1].max() + 1, step = 0.01))
 
     plt.xlim(x1.min(), x1.max())
     plt.ylim(x2.min(), x2.max())
-
-    plt.contourf(x1, x2, classifier.predict(np.array([x1.ravel(), x2.ravel()]).T).reshape(x1.shape),
-                 alpha = 0.6, cmap = ListedColormap(('green', 'red')))        
-
+    
+    plt.contourf(
+        x1, x2, classifier.predict(
+            np.array([x1.ravel(), x2.ravel()]).T).reshape(x1.shape), 
+        alpha = 0.6, cmap = ListedColormap(('green', 'red')))        
+    
     for i, j in enumerate(np.unique(label_train)):        
-        plt.scatter(x_set[y_set == j,0], x_set[y_set == j,1], marker='o',
-                    color = ListedColormap(('green', 'red'))(i), label=j)
-
-
+        plt.scatter(
+            x_set[y_set == j,0], x_set[y_set == j,1], marker='o', 
+            color = ListedColormap(('green', 'red'))(i), label=j)
+    
+    
     plt.xlabel('Princical Component 1', fontsize = 16)
     plt.ylabel('Principle Component 2', fontsize = 16)
     plt.legend()
-
+    
     if (dataset == 'train'):
         plt.title("%s Training Set" %(model), fontsize = 16)
-        print_accuracy(classifier, feat_train, label_train, feat_test, label_test, "train")
-
+        print_accuracy(
+            classifier, feat_train, label_train, 
+            feat_test, label_test, "train")
+        
     elif (dataset == 'test'):
         plt.title("%s Test Set" %(model), fontsize = 16)
-        print_accuracy(classifier, feat_train, label_train, feat_test, label_test, "test")
-
+        print_accuracy(
+            classifier, feat_train, label_train, 
+            feat_test, label_test, "test")
+        
     plt.show()
 ```
 
@@ -1152,12 +1182,12 @@ The decision boundary has separated the red points on the right and the green po
 classifier_plot('Linear Regression', 'train')
 ```
 
-    Training Accuracy: 0.9057
+    Training Accuracy: 0.9057 
+    
 
 
 
-
-![](/images/output_66_1.png?raw=true)
+![png](/images/output_66_1.png)
 
 
 The accuracy of the test set is only 0.46% lower than the training set. As you can see, the misclassified points in the test set are in a very similar position to the misclassified points in the training set.
@@ -1167,12 +1197,12 @@ The accuracy of the test set is only 0.46% lower than the training set. As you c
 classifier_plot('Linear Regression', 'test')
 ```
 
-    Test Accuracy: 0.9011
+    Test Accuracy: 0.9011 
+    
 
 
 
-
-![](/images/output_68_1.png?raw=true)
+![png](/images/output_68_1.png)
 
 
 ## Conclusion
