@@ -1086,7 +1086,7 @@ show_plot('train')
 ```
 
 
-![png](output_59_0.png?raw=true)
+![](/images/output_59_0.png?raw=true)
 
 
 The test set has a very similar pattern to the training set, with the red points on the right and green points on the left. The major difference between the sets is that the test set is more sparse, which is exactly what we would expect, since the test set uses 30% of all data points.
@@ -1097,7 +1097,7 @@ show_plot('test')
 ```
 
 
-![png](output_61_0.png?raw=true)
+![](/images/output_61_0.png?raw=true)
 
 
 ## Plotting The Decision Boundary
@@ -1157,7 +1157,7 @@ classifier_plot('Linear Regression', 'train')
 
 
 
-![png](output_66_1.png?raw=true)
+![](/images/output_66_1.png?raw=true)
 
 
 The accuracy of the test set is only 0.46% lower than the training set. As you can see, the misclassified points in the test set are in a very similar position to the misclassified points in the training set.
@@ -1172,7 +1172,7 @@ classifier_plot('Linear Regression', 'test')
 
 
 
-![png](output_68_1.png?raw=true)
+![](/images/output_68_1.png?raw=true)
 
 
 ## Conclusion
