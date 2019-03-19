@@ -1,6 +1,8 @@
 ---
 layout: archive
-author_profile: "true"
+permalink: /tags/
+title: "Project Tags"
+author_profile: true
 header:
   image: #
 ---

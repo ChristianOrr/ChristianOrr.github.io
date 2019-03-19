@@ -1,6 +1,8 @@
 ---
 layout: archive
-author_profile: "true"
+permalink: /categories/
+title: "Project Categories"
+author_profile: true
 header:
   image: #
 ---
