@@ -16,7 +16,7 @@ I'm working with a dataset that contains 8124 different mushrooms. My ultimate g
 
 ## Strategy
 
-I'm going to perform this classification using the machine learning technique, logistic regression. I've decided to use logistic regression because it's one of the simplest classification methods. This gives me the ability to clearly explain each step in this project, without the project getting too long. The aim of logistic regression is to separate the data using a linear function, this function is called the decision boundary. All the points on one side of the decision boundary are classified as poisonous and all points on the opposite side are classified as edible. I'm not going to explain explicitly how the linear function is determined, because this will require university level mathematics and statistics. My short explanation is that each muchroom has a probability function assigned to it, which determines the probability of achieving the correct class (poisonous/edible), given its features. Then the probability functions for all mushrooms are combined to form another function, called a loss function. Then I need to find the minimum of this loss function, which will tell me the optimal decision boundary. I'm going to use skikit-learn to do the logistic regression, so you won't see any of these calculations in this project. Logistic regression can be performed on data points with many dimensions, but for this project I want to work with data in two dimensions. This will allow my computer to quickly process the data and give me the ability to plot all the points on a two dimensional graph. I will end up having 95 separate dimensions, so to transform these features into 2 dimensions, I will use a technique called principle component analysis (PCA). PCA uses a fairly advanced mathematical technique called projection, which projects a vector with higher dimensions onto a vector with lower dimensions. I will be relying on skikit-learn to perform PCA, so you won't need to know exactly how it works. Once the features have been reduced to two dimensions, then I will plot the points on a graph and add the linear decision boundary, created from the logistic regression classifier.
+I'm going to perform this classification using the machine learning technique, logistic regression. I've decided to use logistic regression because it's one of the simplest classification methods. This gives me the ability to clearly explain each step in this project, without the project getting too long. The aim of logistic regression is to separate the data using a linear function, this function is called the decision boundary. All the points on one side of the decision boundary are classified as poisonous and all points on the opposite side are classified as edible. I'm not going to explain explicitly how the linear function is determined, because this will require university level mathematics and statistics. My short explanation is that each muchroom has a probability function assigned to it, which determines the probability of achieving the correct class (poisonous/edible), given its features. Then the probability functions for all mushrooms are combined to form another function, called a loss function. Then I need to find the minimum of this loss function, which will tell me the optimal decision boundary. I'm going to use scikit-learn to do the logistic regression, so you won't see any of these calculations in this project. Logistic regression can be performed on data points with many dimensions, but for this project I want to work with data in two dimensions. This will allow my computer to quickly process the data and give me the ability to plot all the points on a two dimensional graph. I will end up having 95 separate dimensions, so to transform these features into 2 dimensions, I will use a technique called principle component analysis (PCA). PCA uses a fairly advanced mathematical technique called projection, which projects a vector with higher dimensions onto a vector with lower dimensions. I will be relying on scikit-learn to perform PCA, so you won't need to know exactly how it works. Once the features have been reduced to two dimensions, then I will plot the points on a graph and add the linear decision boundary, created from the logistic regression classifier.
 
 ## Importing Libraries and Loading Data
 
@@ -253,7 +253,7 @@ data.isnull().sum()
 
 
 
-If you look at the amount of unique elements in each column, it ranges from 2 to 12. This will become a problem when I do PCA, because I need each element in a column to be comparable to each other on a scale. For example, you can't measure objectively how close one cap shape is to a different cap shape, or how close an odor is to a different odor on a numerical scale. The solution to this problem is to create a new column for each unique element in a column. The next issue is that the elements in each column aren't comparable to elements in other columns. For example, you can't compare a specific cap shape to an odor. To solve this I will use a skikit-learn function called StandardScalar, which gives each column the same mean = 0, and standard deviation = 1. This essentially makes the elements in each column directly comparable.
+If you look at the amount of unique elements in each column, it ranges from 2 to 12. This will become a problem when I do PCA, because I need each element in a column to be comparable to each other on a scale. For example, you can't measure objectively how close one cap shape is to a different cap shape, or how close an odor is to a different odor on a numerical scale. The solution to this problem is to create a new column for each unique element in a column. The next issue is that the elements in each column aren't comparable to elements in other columns. For example, you can't compare a specific cap shape to an odor. To solve this I will use a scikit-learn function called StandardScalar, which gives each column the same mean = 0, and standard deviation = 1. This essentially makes the elements in each column directly comparable.
 
 
 ```python
@@ -418,7 +418,7 @@ features = data.drop('class', axis=1)
 labels = data['class']
 ```
 
-As I stated previously, each column needs to be numerically comparable. So the first thing I need to do is convert all the string elements to integers. Skikit-learn has a built in function called LabelEncoder, which converts each unique string element into a new integer.
+As I stated previously, each column needs to be numerically comparable. So the first thing I need to do is convert all the string elements to integers. scikit-learn has a built in function called LabelEncoder, which converts each unique string element into a new integer.
 
 
 ```python
@@ -853,7 +853,7 @@ feat_train.head(3)
 
 ## Scaling The Data
 
-I now have all my column elements in numeric form and all the elements within a column are numerically comparable to other elements within the same column. However, the elements in each column are still not comparable to elements in other columns. To achieve this, I'm going to scale the data using skikit-learn's StandardScalar function.
+I now have all my column elements in numeric form and all the elements within a column are numerically comparable to other elements within the same column. However, the elements in each column are still not comparable to elements in other columns. To achieve this, I'm going to scale the data using scikit-learn's StandardScalar function.
 
 
 ```python
@@ -976,7 +976,7 @@ feat_train
 
 ## Calculating Accuracy
 
-I'm using skikit-learn's accuracy_score function to measure the accuracy of the classifier.
+I'm using scikit-learn's accuracy_score function to measure the accuracy of the classifier.
 
 
 ```python
@@ -1008,7 +1008,7 @@ def print_accuracy(
 
 ## Creating The Logistic Regression Model
 
-The data is now ready for logistic regression. I just need to feed my training features and training classes into skikit-learns LogisticRegression model, and all the mathematical calculations will be automatically executed for me.
+The data is now ready for logistic regression. I just need to feed my training features and training classes into scikit-learns LogisticRegression model, and all the mathematical calculations will be automatically executed for me.
 
 
 ```python
